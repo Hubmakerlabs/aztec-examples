@@ -14,6 +14,6 @@ The Private eXecution Environment (PXE) within the `aztec-wallet` will be used.
 
 ## Contributions
 
-Example in this repo are heavily curated to showcase and explain atomic functionality of Aztec, as well as slightly larger examples for broader concepts.
+Examples in this repo are heavily curated to showcase and explain atomic functionality of Aztec, as well as slightly larger examples for broader concepts.
 
-Developers: Pull requests contining examples with code AND documentation that fit the brief will be considered.
+Developers: Pull requests containing examples with code AND documentation that fit the brief will be considered.

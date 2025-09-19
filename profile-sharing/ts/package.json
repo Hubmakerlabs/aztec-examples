@@ -1,0 +1,21 @@
+{
+  "name": "profile-sharing-app",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Selective Profile Sharing App using Aztec",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "deploy": "tsx src/deploy.ts",
+    "interact": "tsx src/interact.ts"
+  },
+  "dependencies": {
+    "@aztec/aztec.js": "^1.2.0",
+    "@aztec/accounts": "^1.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0"
+  }
+}

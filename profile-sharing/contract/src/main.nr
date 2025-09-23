@@ -4,10 +4,10 @@ use aztec::macros::aztec;
 pub contract ProfileSharing {
 
     use aztec::{
-        state_vars::{private_set::PrivateSet, public_mutable::PublicMutable, map::Map},
+        messages::logs::note::encode_and_encrypt_note,
+        state_vars::{private_set::PrivateSet, map::Map},
         note::note_viewer_options::NoteViewerOptions,
         note::constants::MAX_NOTES_PER_PAGE,
-        keys::getters::get_public_keys,
         macros::{
             functions::{initializer, private, utility, public},
             storage::storage,
@@ -16,8 +16,7 @@ pub contract ProfileSharing {
         protocol_types::{
             address::AztecAddress, 
             traits::{Packable, Serialize}
-        },
-        prelude::BoundedVec,
+        }
     };
 
     #[derive(Eq,Serialize,Packable)]
@@ -62,7 +61,7 @@ pub contract ProfileSharing {
         };
         
         // Insert the note into the user's profile set
-        storage.profiles.at(owner).insert(profile_note);
+        storage.profiles.at(owner).insert(profile_note).emit(encode_and_encrypt_note(&mut context, context.msg_sender()));
     }
 
     // Share a profile with another user
@@ -84,7 +83,7 @@ pub contract ProfileSharing {
         };
         
         // Insert the note into the recipient's profile set
-        storage.profiles.at(recipient).insert(shared_profile);
+        storage.profiles.at(recipient).insert(shared_profile).emit(encode_and_encrypt_note(&mut context, context.msg_sender()));
     }
 
     // Update an existing profile (nullify old, create new)

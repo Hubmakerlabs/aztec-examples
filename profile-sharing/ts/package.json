@@ -10,8 +10,8 @@
     "interact": "tsx src/interact.ts"
   },
   "dependencies": {
-    "@aztec/aztec.js": "^1.2.0",
-    "@aztec/accounts": "^1.2.0"
+    "@aztec/aztec.js": "v2.0.2",
+    "@aztec/accounts": "v2.0.2"
   },
   "devDependencies": {
     "typescript": "^5.8.3",

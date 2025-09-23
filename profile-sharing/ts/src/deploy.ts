@@ -25,7 +25,7 @@ async function main() {
   const artifact = loadContractArtifact(ArtifactJson);
 
   // Load artifact and deploy
-  const contract = await Contract.deploy(ownerWallet, artifact, []).send().deployed();
+  const contract = await Contract.deploy(ownerWallet, artifact, []).send({from: ownerWallet.getAddress()}).deployed();
   const address = contract.address.toString();
   console.log(`ProfileSharing deployed at ${address}`);
 

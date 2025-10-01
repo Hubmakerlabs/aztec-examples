@@ -17,6 +17,7 @@ help:
 build:
 	@echo "Building contract..."
 	cd contract && aztec-nargo compile
+	cd contract && aztec-postprocess-contract
 
 test:
 	@echo "Running contract tests..."

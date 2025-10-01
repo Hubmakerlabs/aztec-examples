@@ -26,9 +26,9 @@ async function main() {
   const contract = await Contract.at(AztecAddress.fromString(profileSharing), artifact, a);
 
   // Create and share profiles
-  //const profile = await contract.methods.create_profile(strToFr('Alice'), strToFr('NY dev'), 25, Fr.random()).send({from: a.getAddress()}).wait();
-  await contract.methods.share_profile(b.getAddress(), strToFr('Alice'), strToFr('NY dev'), 25, Fr.random()).send({from: a.getAddress()}).wait();
-  const profile = await contract.methods.get_profile(b.getAddress()).simulate({from: a.getAddress()});
+  await contract.methods.create_profile(strToFr('Alice'), strToFr('NY dev'), 25, Fr.random()).send({from: a.getAddress()}).wait();
+  //await contract.methods.share_profile(b.getAddress(), strToFr('Alice'), strToFr('NY dev'), 25, Fr.random()).send({from: a.getAddress()}).wait();
+  const profile = await contract.methods.get_profile(a.getAddress()).simulate({from: a.getAddress()});
   console.log('Profile:', profile);
 
   console.log('Created and shared profile.');

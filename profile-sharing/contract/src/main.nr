@@ -18,12 +18,13 @@ pub contract ProfileSharing {
             traits::{Packable, Serialize}
         }
     };
+    use compressed_string::FieldCompressedString;
 
     #[derive(Eq,Serialize,Packable)]
     #[note]
     pub struct ProfileNote {
-        name_hash: Field,
-        bio_hash: Field,
+        name_hash: FieldCompressedString,
+        bio_hash: FieldCompressedString,
         age: u8,
         owner: AztecAddress,
         randomness: Field,
@@ -44,8 +45,8 @@ pub contract ProfileSharing {
     // Create or update a profile
     #[private]
     fn create_profile(
-        name_hash: Field,
-        bio_hash: Field,
+        name_hash: FieldCompressedString,
+        bio_hash: FieldCompressedString,
         age: u8,
         randomness: Field
     ) {
@@ -68,8 +69,8 @@ pub contract ProfileSharing {
     #[private]
     fn share_profile(
         recipient: AztecAddress,
-        name_hash: Field,
-        bio_hash: Field,
+        name_hash: FieldCompressedString,
+        bio_hash: FieldCompressedString,
         age: u8,
         randomness: Field
     ) {
@@ -124,13 +125,12 @@ pub contract ProfileSharing {
     // Utility function to get a specific profile by owner
     // Returns (found, note). If not found, note contains zero fields.
     #[utility]
-    unconstrained fn get_profile(owner: AztecAddress) -> (bool, ProfileNote) {
+    unconstrained fn get_profile(owner: AztecAddress) -> Option<ProfileNote> {
         let notes = storage.profiles.at(owner).view_notes(NoteViewerOptions::new());
         if notes.len() > 0 {
-            (true, notes.get_unchecked(0))
+            Option::some(notes.get_unchecked(0))
         } else {
-            let empty = ProfileNote { name_hash: 0, bio_hash: 0, age: 0, owner, randomness: 0 };
-            (false, empty)
+            Option::none()
         }
     }
 }
